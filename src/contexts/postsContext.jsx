@@ -9,10 +9,9 @@ export const PostsProvider = ({ children }) => {
   const [paginationInfo, setPaginationInfo] = useState(null);
   const isFetchingRef = useRef(false);
   const [savedPostsList, setSavedPostsList] = useState([]);
+  const [savedPosts, setSavedPosts] = useState([]);
 
-  const hasMore = paginationInfo
-    ? paginationInfo.currentPage < paginationInfo.numberOfPages
-    : true;
+  const hasMore = paginationInfo ? paginationInfo.currentPage < paginationInfo.numberOfPages : true;
 
   const getAllData = useCallback(async (page = 1) => {
     if (isFetchingRef.current) return;
@@ -68,6 +67,7 @@ export const PostsProvider = ({ children }) => {
   const handleSavedPostsList = () => {
     if (!localStorage.getItem("savedPosts")) return;
     const savedData = JSON.parse(localStorage.getItem("savedPosts"));
+    setSavedPosts(savedData);
     setSavedPostsList(savedData.map((p) => p._id));
   };
   useEffect(() => {
@@ -78,6 +78,8 @@ export const PostsProvider = ({ children }) => {
       value={{
         setSavedPostsList,
         savedPostsList,
+        savedPosts,
+        setSavedPosts,
         posts,
         setPosts,
         isLoading,

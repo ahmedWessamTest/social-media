@@ -8,7 +8,9 @@ import Button from "../../components/utils/Button";
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(""); // ✅ Added state for error message
   const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,7 +20,13 @@ const SignIn = () => {
     onSubmit: async (values) => {
       try {
         setLoading(true);
-        await handelSignIn(values, navigate);
+        setErrorMsg(""); // ✅ Clear any existing error
+        const result = await handelSignIn(values, navigate); // ✅ Capture result
+
+        // ✅ Show error if login failed
+        if (!result.success) {
+          setErrorMsg(result.message);
+        }
       } finally {
         setLoading(false);
       }
@@ -31,6 +39,13 @@ const SignIn = () => {
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Sign In
         </h2>
+
+        {/* ✅ Show error message if exists */}
+        {errorMsg && (
+          <div className="bg-red-100 text-red-700 px-4 py-2 rounded text-sm text-center mb-4">
+            {errorMsg}
+          </div>
+        )}
 
         <form onSubmit={formik.handleSubmit} className="space-y-6">
           <Typefield

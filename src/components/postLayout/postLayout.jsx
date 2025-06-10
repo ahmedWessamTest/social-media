@@ -8,15 +8,7 @@ import { useLocation } from "react-router-dom";
 
 const PostLayout = () => {
   const { pathname } = useLocation();
-  const {
-    posts,
-    isLoading,
-    hasError,
-    hasMore,
-    isFetching,
-    getAllData,
-    getUserData,
-  } = useContext(PostsContext);
+  const { posts, isLoading, hasError, hasMore, isFetching, getAllData, getUserData } = useContext(PostsContext);
 
   const listInnerRef = useRef();
   const pageRef = useRef(1);
@@ -62,37 +54,22 @@ const PostLayout = () => {
   if (hasError) {
     return (
       <Alert color="failure" icon={Info}>
-        <span className="font-medium">Error!</span> Failed to load posts. Please
-        try again later.
+        <span className="font-medium">Error!</span> Failed to load posts. Please try again later.
       </Alert>
     );
   }
 
   return (
-    <div
-      className="space-y-4 overflow-y-auto"
-      onScroll={handleScroll}
-      ref={listInnerRef}
-      style={{ maxHeight: "100vh" }}
-    >
+    <div className="space-y-4 overflow-y-auto" onScroll={handleScroll} ref={listInnerRef} style={{ maxHeight: "100vh" }}>
       {posts.map((post) => (
-        <PostCard
-          key={`${post.id}-${post.updatedAt || post.createdAt}`}
-          post={post}
-        />
+        <PostCard key={`${post.id}-${post.updatedAt || post.createdAt}`} post={post} />
       ))}
 
       {isLoading && <LoadingSkeleton />}
 
-      {!hasMore && posts.length > 0 && (
-        <div className="text-center py-4 text-gray-500">
-          You've reached the end of the list
-        </div>
-      )}
+      {!hasMore && posts.length > 0 && <div className="text-center py-4 text-gray-500">You've reached the end of the list</div>}
 
-      {!isLoading && posts.length === 0 && (
-        <div className="text-center py-4 text-gray-500">No posts available</div>
-      )}
+      {!isLoading && posts.length === 0 && <div className="text-center py-4 text-gray-500">No posts available</div>}
     </div>
   );
 };

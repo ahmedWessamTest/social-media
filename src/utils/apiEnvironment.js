@@ -29,7 +29,7 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       console.warn("Token expired or invalid");
       // localStorage.removeItem("userToken");
-      // window.location.href = "/login";
+      // window.location.href = "/signin";
     } else if (error.response?.status === 403) {
       console.error("Forbidden: ", error.response.data);
     }

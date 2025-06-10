@@ -6,6 +6,8 @@ import { PostsProvider } from "./contexts/postsContext";
 import UserProfile from "./pages/userProfile/userProfile";
 import Register from "./pages/Register/Register";
 import SignIn from "./pages/Sign in/SignIn";
+import NotFound from "./pages/NotFount/NotFound"
+
 const router = createBrowserRouter([
   {
     path: "register",
@@ -20,6 +22,10 @@ const router = createBrowserRouter([
     element: <BlankLayout />,
     children: [
       {
+        index: true,
+        element: <SignIn />,
+      },
+      {
         path: "home",
         element: <Home />,
       },
@@ -27,7 +33,15 @@ const router = createBrowserRouter([
         path: "profile",
         element: <UserProfile />,
       },
+      {
+        path: "*", // ✅ Catch-all route inside layout
+        element: <NotFound />,
+      },
     ],
+  },
+  {
+    path: "*", // ✅ Catch-all route outside layout (e.g. /random-url)
+    element: <NotFound />,
   },
 ]);
 
@@ -40,4 +54,5 @@ function App() {
     </PostsProvider>
   );
 }
+
 export default App;

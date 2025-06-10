@@ -2,12 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Image, Trash2 } from "lucide-react";
 import CustomDropzone from "./CustomDropzone";
 
-export default function ImageUpload({
-  selectedImage,
-  setSelectedImage,
-  maxSize = 1 * 1024 * 1024,
-  isDropzone = false,
-}) {
+export default function ImageUpload({ selectedImage, setSelectedImage, maxSize = 1 * 1024 * 1024, isDropzone = false }) {
   const [preview, setPreview] = useState(null);
   const [error, setError] = useState(null);
   const fileInputRef = useRef(null);
@@ -79,21 +74,12 @@ export default function ImageUpload({
   return (
     <div className="w-full relative pb-2">
       {/* Hidden file input */}
-      <input
-        type="file"
-        ref={fileInputRef}
-        onChange={handleFileSelect}
-        accept="image/*"
-        className="hidden"
-      />
+      <input type="file" ref={fileInputRef} onChange={handleFileSelect} accept="image/*" className="hidden" />
 
       {/* Custom upload button || dropzone*/}
       {!selectedImage ? (
         isDropzone ? (
-          <CustomDropzone
-            handleFileSelect={handleFileSelect}
-            maxSize={maxSize}
-          />
+          <CustomDropzone handleFileSelect={handleFileSelect} maxSize={maxSize} />
         ) : (
           <button
             type="button"
@@ -101,9 +87,7 @@ export default function ImageUpload({
             className="flex items-center gap-2 p-2 rounded-full hover:bg-gray-100 hover:cursor-pointer active:bg-gray-200 transition-all duration-200"
           >
             <Image size={20} color="#27364B" />
-            <span className="text-[#27364B] font-medium text-sm">
-              Add Media
-            </span>
+            <span className="text-[#27364B] font-medium text-sm">Add Media</span>
           </button>
         )
       ) : (
@@ -116,11 +100,7 @@ export default function ImageUpload({
       {/* Image preview */}
       {preview && (
         <div className=" flex flex-col gap-2 p-1 sm:p-4 bg-white border border-gray-200 rounded-lg shadow-sm transition-all duration-200">
-          <img
-            src={preview}
-            alt="Preview"
-            className=" h-auto max-h-64 rounded-lg shadow-md"
-          />
+          <img src={preview} alt="Preview" className=" h-auto max-h-64 rounded-lg shadow-md" />
 
           {/* Image info */}
           <div className="flex flex-col gap-1 sm:gap-0 sm:flex-row justify-between items-center ">
@@ -129,9 +109,7 @@ export default function ImageUpload({
                 <Image size={14} />
                 {selectedImage?.name}
               </p>
-              <p className="text-xs text-gray-500">
-                {(selectedImage?.size / 1024).toFixed(1)} KB
-              </p>
+              <p className="text-xs text-gray-500">{(selectedImage?.size / 1024).toFixed(1)} KB</p>
             </div>
 
             <button

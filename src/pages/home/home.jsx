@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <>
       <div className="container mx-auto">
-        <div className="grid py-7 lg:grid-cols-12 gap-x-3">
-          <div className="lg:col-span-3"></div>
-          <div className="feed col-span-6 space-y-4">
+        <div className="grid py-7 lg:grid-cols-12 gap-3 ">
+          
+          <div className="feed  ms-4 col-span-9 space-y-4">
             <CreatePost />
             <PostLayout />
           </div>

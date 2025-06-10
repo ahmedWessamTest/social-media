@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import CustomDropzone from "../../components/CustomDropzone";
-import ImageUpload from "../../components/ImageUpload";
-import api from "../../utils/apiEvironment";
-import StatusOverlay from "../../components/StatusOverlay";
+import CustomDropzone from "../../../components/CustomDropzone";
+import ImageUpload from "../../../components/ImageUpload";
+import api from "../../../utils/apiEnvironment";
+import StatusOverlay from "../../../components/StatusOverlay";
 
 export default function ChangeAvatar() {
   const [image, setImage] = useState(null);
@@ -34,10 +34,8 @@ export default function ChangeAvatar() {
   }
 
   return (
-    <div className="flex flex-col gap-4 p-4 justify-center bg-white min-w-80 relative">
+    <div className="flex flex-col w-full gap-4 lg:p-4 justify-center bg-white md:min-w-70 lg:min-w-80 transition-all relative">
       <StatusOverlay status={status} onDismiss={dismissOverlay} />
-
-      <p>ChangeAvatar</p>
 
       <ImageUpload isDropzone selectedImage={image} setSelectedImage={setImage} />
 
